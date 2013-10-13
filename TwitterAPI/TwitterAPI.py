@@ -38,17 +38,17 @@ class TwitterAPI(object):
 			session.stream = True
 			method = 'GET' if params is None else 'POST'
 			url = self._prepare_url(STREAMING_ENDPOINTS[endpoint][0], resource)
-                        print url
+#                        print url
 			timeout = STREAMING_SOCKET_TIMEOUT
 		elif endpoint in REST_ENDPOINTS:
 			session.stream = False
 			method = REST_ENDPOINTS[endpoint][0]
 			url = self._prepare_url(REST_SUBDOMAIN, resource)
-                        print url
+#                        print url
 			timeout = REST_SOCKET_TIMEOUT
 		else:
 			raise Exception('"%s" is not valid endpoint' % resource)
-                print url, params
+#                print url, params
 		r = session.request(method, url, params=params, timeout=timeout)
 		return TwitterResponse(r, session.stream)
 
@@ -125,6 +125,6 @@ class StreamingIterator(object):
 		"""Return a tweet status as a JSON object."""
 		for item in self.results:
 			if item:
-                                print item
+#                                print item
 				yield json.loads(item.decode('utf-8'))
 

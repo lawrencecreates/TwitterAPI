@@ -21,8 +21,10 @@ bbox = '-95.49, 38.85,-95.09,39.03'
 
 
 
-print bbox
+#print bbox
 
 r = api.request('statuses/filter', {'locations': bbox})
 for item in r.get_iterator():
+    #print "ITEM:'%s'" % item
     print item
+    
