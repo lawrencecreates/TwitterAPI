@@ -1,5 +1,9 @@
 import json 
-d = open('lawrences.json', 'rb')
+import sys
+
+infile = sys.argv[1]
+d = open(infile, 'rb')
+o = open(infile + ".out", 'wb')
 data= d.read()
 lines = data.split("\n")
 import pprint
@@ -33,12 +37,14 @@ for line in lines[3:] :
                                 #print tweet
                                 #pp.pprint(tweet)
                                 users[tweet[u'user'][u'screen_name']]=1
+                                o.write("%s\n" % tweet)
 
     except Exception, e:
         #print "problem read %s" % line
         traceback.print_exc()
         print e
         #raise e
+o.close()
  
 for x in users.keys():
-     print "<a href=https://twitter.com/%s>%s</a>" % (x,x)
+     print "<a href=https://twitter.com/%s>%s</a><p/>" % (x,x)
